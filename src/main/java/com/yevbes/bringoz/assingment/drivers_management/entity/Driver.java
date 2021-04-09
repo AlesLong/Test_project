@@ -96,6 +96,13 @@ public class Driver {
         this.address = address;
     }
 
+    public DriversStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(DriversStatus status) {
+        this.status = status;
+    }
 
     public LocalTime getStartWork() {
         return startWork;
@@ -129,7 +136,7 @@ public class Driver {
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
                 ", address='" + address + '\'' +
-
+                ", status=" + status +
                 ", startWork=" + startWork +
                 ", endWork=" + endWork +
                 ", isOnMap=" + isOnMap +
