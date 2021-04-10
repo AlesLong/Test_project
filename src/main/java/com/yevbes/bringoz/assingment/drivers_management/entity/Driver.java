@@ -3,7 +3,6 @@ package com.yevbes.bringoz.assingment.drivers_management.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 import java.time.LocalTime;
 import java.util.Objects;
 

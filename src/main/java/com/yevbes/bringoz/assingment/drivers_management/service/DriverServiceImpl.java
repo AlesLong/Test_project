@@ -43,4 +43,21 @@ public class DriverServiceImpl implements DriverService {
     public void deleteDriver(int id) {
         driverRepository.deleteById(id);
     }
+
+    @Override
+    @Transactional
+    public List<Driver> findAllAvailable(){
+        return driverRepository.findAllAvailable();
+    }
+
+    @Override
+    public List<Driver> findAllDelivering() {
+        return driverRepository.findAllDelivering();
+    }
+
+    @Override
+    public List<Driver> findAllUnavailable() {
+        return driverRepository.findAllUnavailable();
+    }
+
 }
