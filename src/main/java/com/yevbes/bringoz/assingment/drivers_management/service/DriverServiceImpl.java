@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +47,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     @Transactional
-    public List<Driver> findAllAvailable(){
+    public List<Driver> findAllAvailable() {
         return driverRepository.findAllAvailable();
     }
 
@@ -58,6 +59,16 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public List<Driver> findAllUnavailable() {
         return driverRepository.findAllUnavailable();
+    }
+
+    @Override
+    public List<Driver> findDriversByTimeInterval(LocalTime start, LocalTime end) {
+        return driverRepository.findDriversByTimeInterval(start, end);
+    }
+
+    @Override
+    public List<Driver> findAllDriversInArea(double north, double south, double east, double west) {
+        return driverRepository.findAllDriversInArea(north, south, east, west);
     }
 
 }

@@ -10,10 +10,8 @@ import java.util.Objects;
 @Table(name = "drivers")
 public class Driver {
 
-//    @SequenceGenerator(name="pk_sequence",sequenceName="entity_id_seq", allocationSize=1)
-//    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="pk_sequence")
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     @Column(name = "id")
     private int id;
 
@@ -42,12 +40,15 @@ public class Driver {
     @Column(name = "end_work_time", columnDefinition = "time")
     private LocalTime endWork;
 
-    @Column(name = "is_on_map")
-    private boolean isOnMap;
+    @Column(name = "longitude")
+    private double longitude;
+
+    @Column(name = "latitude")
+    private double latitude;
 
 
     public Driver(int id, String firstName, String lastName, int age, String address, DriversStatus status,
-                  LocalTime startWork, LocalTime endWork, boolean isOnMap) {
+                  LocalTime startWork, LocalTime endWork) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -56,13 +57,12 @@ public class Driver {
         this.status = status;
         this.startWork = startWork;
         this.endWork = endWork;
-        this.isOnMap = true;
+
     }
 
     public Driver() {
         super();
     }
-
 
     public int getId() {
         return id;
@@ -128,12 +128,20 @@ public class Driver {
         this.endWork = endWork;
     }
 
-    public boolean isOnMap() {
-        return isOnMap;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setOnMap(boolean onMap) {
-        isOnMap = onMap;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
     @Override
@@ -147,23 +155,21 @@ public class Driver {
                 ", status=" + status +
                 ", startWork=" + startWork +
                 ", endWork=" + endWork +
-                ", isOnMap=" + isOnMap +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
                 '}';
     }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Driver driver = (Driver) o;
-        return id == driver.id && age == driver.age && isOnMap == driver.isOnMap
-                && firstName.equals(driver.firstName) && lastName.equals(driver.lastName) && address.equals(driver.address)
-                && status == driver.status && startWork.equals(driver.startWork) && endWork.equals(driver.endWork);
+        return id == driver.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, age, address, status, startWork, endWork, isOnMap);
+        return Objects.hash(id);
     }
 }
