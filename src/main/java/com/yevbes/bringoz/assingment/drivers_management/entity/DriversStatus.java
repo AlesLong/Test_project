@@ -1,9 +1,9 @@
 package com.yevbes.bringoz.assingment.drivers_management.entity;
 
 public enum DriversStatus {
-    AVAILABLE("available"),
-    DELIVERING("delivering"),
-    UNAVAILABLE("unavailable");
+    AVAILABLE("AVAILABLE"),
+    DELIVERING("DELIVERING"),
+    UNAVAILABLE("UNAVAILABLE");
 
     private String status;
 
