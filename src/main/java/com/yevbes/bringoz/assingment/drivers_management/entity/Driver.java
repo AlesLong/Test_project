@@ -1,6 +1,8 @@
 package com.yevbes.bringoz.assingment.drivers_management.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.time.LocalTime;
 import java.util.Objects;
@@ -8,8 +10,11 @@ import java.util.Objects;
 @Entity
 @Table(name = "drivers")
 public class Driver {
+
+//    @SequenceGenerator(name="pk_sequence",sequenceName="entity_id_seq", allocationSize=1)
+//    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="pk_sequence")
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
 
@@ -19,9 +24,10 @@ public class Driver {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+
     @Column(name = "age", nullable = false)
-    @Size(min = 18, max = 65, message
-            = "Age must be between 18 and 65")
+    @Min(value = 18, message = "Age should not be less than 18")
+    @Max(value = 65, message = "Age should not be greater than 65")
     private int age;
 
     @Column(name = "address")

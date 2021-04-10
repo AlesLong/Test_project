@@ -1,8 +1,12 @@
 package com.yevbes.bringoz.assingment.drivers_management.controller;
 
 import com.yevbes.bringoz.assingment.drivers_management.entity.Driver;
+import com.yevbes.bringoz.assingment.drivers_management.exception.DriverIncorrectData;
+import com.yevbes.bringoz.assingment.drivers_management.exception.NoSuchDriverException;
 import com.yevbes.bringoz.assingment.drivers_management.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +30,9 @@ public class Controller {
     @GetMapping("/drivers/{id}")
     public Driver getDriver(@PathVariable int id) {
         Driver driver = driverService.getDriver(id);
+        if (driver == null) {
+            throw new NoSuchDriverException("There is no driver with ID = " + id + " in Database");
+        }
         return driver;
     }
 
@@ -46,4 +53,5 @@ public class Controller {
         driverService.deleteDriver(id);
         return "Driver with id: " + id + " was deleted";
     }
+
 }
