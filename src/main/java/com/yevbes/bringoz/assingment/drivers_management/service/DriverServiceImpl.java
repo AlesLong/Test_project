@@ -24,6 +24,12 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     @Transactional
+    public Driver createDriver(Driver driver) {
+        return driverRepository.save(driver);
+    }
+
+    @Override
+    @Transactional
     public void saveDriver(Driver driver) {
         driverRepository.save(driver);
     }
@@ -52,21 +58,25 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    @Transactional
     public List<Driver> findAllDelivering() {
         return driverRepository.findAllDelivering();
     }
 
     @Override
+    @Transactional
     public List<Driver> findAllUnavailable() {
         return driverRepository.findAllUnavailable();
     }
 
     @Override
+    @Transactional
     public List<Driver> findDriversByTimeInterval(LocalTime start, LocalTime end) {
         return driverRepository.findDriversByTimeInterval(start, end);
     }
 
     @Override
+    @Transactional
     public List<Driver> findAllDriversInArea(double north, double south, double east, double west) {
         return driverRepository.findAllDriversInArea(north, south, east, west);
     }
