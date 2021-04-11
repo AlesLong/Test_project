@@ -18,11 +18,7 @@ public interface DriverRepository extends JpaRepository<Driver, Integer> {
     @Query(value = "SELECT * FROM drivers WHERE STATUS = 'UNAVAILABLE'", nativeQuery = true)
     List<Driver> findAllUnavailable();
 
-
-//    @Query(value = "SELECT * FROM drivers d WHERE d.start_work_time <= :end OR d.end_work_time >= :start ", nativeQuery = true)
-//    List<Driver> findDriversByTimeInterval(LocalTime start, LocalTime end);
-
-    @Query(value = "SELECT * FROM drivers d WHERE ( d.start_work_time ,d.end_work_time) OVERLAPS (time :start,time :end) ", nativeQuery = true)
+    @Query(value = "SELECT * FROM drivers d WHERE (time :start ,time :end) OVERLAPS ( d.start_work_time,d.end_work_time) ", nativeQuery = true)
     List<Driver> findDriversByTimeInterval(LocalTime start, LocalTime end);
 
     @Query(value = "SELECT*FROM drivers d WHERE d.latitude <= :north AND d.latitude >= :south AND d.longitude <= :east AND d.longitude >= :west", nativeQuery = true)
