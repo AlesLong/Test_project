@@ -81,4 +81,10 @@ public class DriverServiceImpl implements DriverService {
         return driverRepository.findAllDriversInArea(north, south, east, west);
     }
 
+    @Override
+    @Transactional
+    public List<Driver> getDriverByFirstNameLastName(String firstName, String lastName) {
+        return driverRepository.getDriverByFirstNameLastName(firstName, lastName);
+    }
+
 }

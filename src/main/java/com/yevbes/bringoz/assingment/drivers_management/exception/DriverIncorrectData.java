@@ -4,17 +4,7 @@ public class DriverIncorrectData {
 
     private String info;
 
-    public DriverIncorrectData() {
-
-    }
-
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
+    public DriverIncorrectData(String info) {
         this.info = info;
     }
-
 }

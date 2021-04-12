@@ -9,16 +9,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class DriverGlobalExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<DriverIncorrectData> handleException(NoSuchDriverException exception) {
-        DriverIncorrectData data = new DriverIncorrectData();
-        data.setInfo(exception.getMessage());
-        return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);
+    public ResponseEntity<DriverIncorrectData> handleException(DriverException exception) {
+        DriverIncorrectData data = new DriverIncorrectData(exception.getMessage());
+        return new ResponseEntity<>(data, exception.getStatus());
     }
+
 
     @ExceptionHandler
     public ResponseEntity<DriverIncorrectData> handleException(Exception exception) {
-        DriverIncorrectData data = new DriverIncorrectData();
-        data.setInfo(exception.getMessage());
+        DriverIncorrectData data = new DriverIncorrectData(exception.getMessage());
         return new ResponseEntity<>(data, HttpStatus.BAD_REQUEST);
     }
 }

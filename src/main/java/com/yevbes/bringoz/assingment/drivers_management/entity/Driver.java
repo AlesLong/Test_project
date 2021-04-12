@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Driver {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
 
@@ -47,9 +47,9 @@ public class Driver {
     private double latitude;
 
 
-    public Driver(int id, String firstName, String lastName, int age, String address, DriversStatus status,
+    public Driver(String firstName, String lastName, int age, String address, DriversStatus status,
                   LocalTime startWork, LocalTime endWork) {
-        this.id = id;
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -64,12 +64,19 @@ public class Driver {
         super();
     }
 
-    public int getId() {
-        return id;
+    public Driver(int id, String firstName, String lastName, @Min(value = 18, message = "Age should not be less than 18") @Max(value = 65, message = "Age should not be greater than 65") int age, String address, DriversStatus status, LocalTime startWork, LocalTime endWork) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.address = address;
+        this.status = status;
+        this.startWork = startWork;
+        this.endWork = endWork;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
 
     public String getFirstName() {
@@ -165,11 +172,11 @@ public class Driver {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Driver driver = (Driver) o;
-        return id == driver.id;
+        return age == driver.age && Double.compare(driver.longitude, longitude) == 0 && Double.compare(driver.latitude, latitude) == 0 && Objects.equals(firstName, driver.firstName) && Objects.equals(lastName, driver.lastName) && Objects.equals(address, driver.address) && status == driver.status && Objects.equals(startWork, driver.startWork) && Objects.equals(endWork, driver.endWork);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(firstName, lastName, age, address, status, startWork, endWork, longitude, latitude);
     }
 }

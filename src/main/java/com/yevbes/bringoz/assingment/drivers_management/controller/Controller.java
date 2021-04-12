@@ -1,6 +1,7 @@
 package com.yevbes.bringoz.assingment.drivers_management.controller;
 
 import com.yevbes.bringoz.assingment.drivers_management.entity.Driver;
+import com.yevbes.bringoz.assingment.drivers_management.exception.DriverAlreadyExistsException;
 import com.yevbes.bringoz.assingment.drivers_management.exception.NoSuchDriverException;
 import com.yevbes.bringoz.assingment.drivers_management.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,15 +36,30 @@ public class Controller {
         return driver;
     }
 
-    @PostMapping("/drivers")
+    @PutMapping("/drivers")
     public Driver createNewDriver(@RequestBody Driver driver) {
-        driverService.saveDriver(driver);
+        if (driverService.getDriverByFirstNameLastName(driver.getFirstName(), driver.getLastName()).isEmpty()) {
+            driverService.saveDriver(driver);
+        } else {
+            throw new DriverAlreadyExistsException("Driver already exists!");
+        }
         return driver;
     }
 
-    @PutMapping("/drivers")
+    @PostMapping("/drivers")
     public Driver updateDriver(@RequestBody Driver driver) {
-        driverService.saveDriver(driver);
+        List<Driver> driverByFirstNameLastName = driverService.getDriverByFirstNameLastName(driver.getFirstName(), driver.getLastName());
+        if (driverByFirstNameLastName.size() == 1) {
+            Driver existingDriver = driverByFirstNameLastName.get(0);
+            existingDriver.setAge(driver.getAge());
+            existingDriver.setAddress(driver.getAddress());
+            existingDriver.setEndWork(driver.getEndWork());
+            existingDriver.setStartWork(driver.getStartWork());
+            existingDriver.setLongitude(driver.getLongitude());
+            existingDriver.setLatitude(driver.getLatitude());
+            driverService.saveDriver(existingDriver);
+        }
+
         return driver;
     }
 

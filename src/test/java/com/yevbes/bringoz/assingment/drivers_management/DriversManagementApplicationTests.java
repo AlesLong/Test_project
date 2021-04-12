@@ -59,21 +59,6 @@ class DriversManagementApplicationTests {
     }
 
     @Test
-    public void createDriverExpectingOneCall() throws Exception {
-        Mockito.when(driverService.createDriver(driver)).thenReturn(driver);
-
-        mockMvc.perform(post("/api/drivers").
-                content(JSONExample)
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding("utf-8")
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andReturn();
-
-        Mockito.verify(driverService, Mockito.times(1)).saveDriver(driver);
-    }
-
-    @Test
     public void getAllDeliveringDriversExpectedOne() throws Exception {
         driver.setStatus(DriversStatus.DELIVERING);
         list.add(driver);

@@ -23,4 +23,7 @@ public interface DriverRepository extends JpaRepository<Driver, Integer> {
 
     @Query(value = "SELECT*FROM drivers d WHERE d.latitude <= :north AND d.latitude >= :south AND d.longitude <= :east AND d.longitude >= :west", nativeQuery = true)
     List<Driver> findAllDriversInArea(double north, double south, double east, double west);
+
+    @Query(value = "SELECT*FROM drivers d WHERE d.first_name = :firstName AND d.last_name = :lastName", nativeQuery = true)
+    List<Driver> getDriverByFirstNameLastName(String firstName, String lastName);
 }

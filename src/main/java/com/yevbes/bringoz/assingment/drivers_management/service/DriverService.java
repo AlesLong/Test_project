@@ -27,4 +27,6 @@ public interface DriverService {
 
     List<Driver> findAllDriversInArea(double north, double south, double east, double west);
 
+    List<Driver> getDriverByFirstNameLastName(String firstName, String lastName);
+
 }
