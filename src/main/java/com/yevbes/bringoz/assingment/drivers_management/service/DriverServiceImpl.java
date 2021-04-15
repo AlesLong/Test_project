@@ -17,25 +17,21 @@ public class DriverServiceImpl implements DriverService {
     private DriverRepository driverRepository;
 
     @Override
-    @Transactional
     public List<Driver> getAllDrivers() {
         return driverRepository.findAll();
     }
 
     @Override
-    @Transactional
     public Driver createDriver(Driver driver) {
         return driverRepository.save(driver);
     }
 
     @Override
-    @Transactional
     public void saveDriver(Driver driver) {
         driverRepository.save(driver);
     }
 
     @Override
-    @Transactional
     public Driver getDriver(int id) {
         Driver driver = null;
         Optional<Driver> optionalDriver = driverRepository.findById(id);
@@ -46,43 +42,36 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    @Transactional
     public void deleteDriver(int id) {
         driverRepository.deleteById(id);
     }
 
     @Override
-    @Transactional
     public List<Driver> findAllAvailable() {
         return driverRepository.findAllAvailable();
     }
 
     @Override
-    @Transactional
     public List<Driver> findAllDelivering() {
         return driverRepository.findAllDelivering();
     }
 
     @Override
-    @Transactional
     public List<Driver> findAllUnavailable() {
         return driverRepository.findAllUnavailable();
     }
 
     @Override
-    @Transactional
     public List<Driver> findDriversByTimeInterval(LocalTime start, LocalTime end) {
         return driverRepository.findDriversByTimeInterval(start, end);
     }
 
     @Override
-    @Transactional
     public List<Driver> findAllDriversInArea(double north, double south, double east, double west) {
         return driverRepository.findAllDriversInArea(north, south, east, west);
     }
 
     @Override
-    @Transactional
     public List<Driver> getDriverByFirstNameLastName(String firstName, String lastName) {
         return driverRepository.getDriverByFirstNameLastName(firstName, lastName);
     }
